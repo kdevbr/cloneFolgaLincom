@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar Notificação</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 30px;
+        }
+
+        .l {
+            height: 50%;
+            border: 1px solid black;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+    <script>
+        function enviarRequisicao() {
+            fetch('notificação.php', {
+                method: 'POST'
+            })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('response').innerText = data;
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                });
+        }
+    </script>
+</head>
+
+<body>
+    <div class="l">
+        <h2>Enviar</h2>
+        <button onclick="enviarRequisicao()">Enviar notificação</button>
+    </div>
+    <div class="l">
+        <h2>Resposta:</h2>
+        <p id="response"></p>
+    </div>
+</body>
+
+</html>
