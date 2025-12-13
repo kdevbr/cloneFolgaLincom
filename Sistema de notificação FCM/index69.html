@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        gap: 20px;
+        background: #222;
+        color: white;
+        font-family: sans-serif;
+    }
+
+    button {
+        font-size: 22px;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .days {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        gap: 20px;
+        transition: transform 0.4s ease;
+    }
+
+    .days li {
+        width: 60px;
+        height: 60px;
+        background: #444;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        transition: transform 0.4s, background 0.4s;
+    }
+
+    /* Item do meio maior */
+    .active {
+        transform: scale(1.5);
+        background: #0099ff;
+    }
+</style>
+</head>
+<body>
+
+<button id="volta">ᗡ===8</button>
+
+<ul id="offDaysList" class="days">
+    <li>0</li>
+    <li>1</li>
+    <li>2</li> <!-- COMEÇA NO MEIO -->
+    <li>3</li>
+    <li>4</li>
+</ul>
+
+<button id="avança">8===D</button>
+
+<script>
+const list = document.querySelector(".days");
+const items = document.querySelectorAll(".days li");
+let index = 2; // começa no meio
+
+function updateCarousel() {
+    items.forEach(i => i.classList.remove("active"));
+    items[index].classList.add("active");
+
+    // mover lista
+    const offset = -index * 80; // distancia entre itens
+    list.style.transform = `translateX(${offset}px)`;
+}
+
+document.getElementById("avança").onclick = () => {
+    if (index < items.length - 1) index++;
+    updateCarousel();
+};
+
+document.getElementById("volta").onclick = () => {
+    if (index > 0) index--;
+    updateCarousel();
+};
+
+updateCarousel();
+</script>
+
+</body>
+</html>
